@@ -7,6 +7,7 @@ struct PlayingCard
 {
   
     int value = 0;
+    int suit = 0;
 
     void print()
     {
@@ -31,7 +32,22 @@ struct PlayingCard
             std::cout << "King of ";
         }
 
-
+        if(suit == 1)
+        {
+            std::cout << "Diamonds";
+        }
+        if (suit == 2)
+        {
+            std::cout << "Hearts";
+        }
+        if (suit == 3)
+        {
+            std::cout << "Spades";
+        }
+        if (suit == 4)
+        {
+            std::cout << "Clubs";
+        }
 
     }
 
@@ -54,6 +70,7 @@ int main()
         {
             PlayingCard card;
             card.value = // rand between 1 - 13;
+            card.suit =  // rand between 1-4;
             Deck[i] = card;
         }
        
