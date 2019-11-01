@@ -1,13 +1,13 @@
 #include <iostream>
 #include <vector>
+#include <random>
 
 
 
 struct PlayingCard 
 {
-  
-    int value = 0;
     int suit = 0;
+    int value = 0;
 
     void print()
     {
@@ -32,21 +32,22 @@ struct PlayingCard
             std::cout << "King of ";
         }
 
+
         if(suit == 1)
         {
-            std::cout << "Diamonds";
+            std::cout << "Diamonds ";
         }
         if (suit == 2)
         {
-            std::cout << "Hearts";
+            std::cout << "Hearts ";
         }
         if (suit == 3)
         {
-            std::cout << "Spades";
+            std::cout << "Spades ";
         }
         if (suit == 4)
         {
-            std::cout << "Clubs";
+            std::cout << "Clubs ";
         }
 
     }
@@ -54,31 +55,40 @@ struct PlayingCard
 };
 
 
+
 int main()
 {
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<int> rvalue(1,13);
+    std::uniform_int_distribution<int> rsuit(1,4);
 
-    bool game;
+    bool game = false;
     char g;
+    int playerValue = 0;
+    int dealerValue = 0;
 
-    std::vector<> playerHand;
-    std::vector<> dealerHand;
+   // std::vector<> playerHand;
+    //std::vector<P> dealerHand;
 
-    //create deck DOES NOT WORK YET
-    std::vector<PlayingCard, 52> Deck;
-    
-    for(int i = 0; i < 52; ++i)
+    //create and shuffle deck 
+    std::vector<PlayingCard> Deck;
+
+    for(int i = 1; i <= 4; ++i)
+    {
+        for(int s = 1; s <= 13; s++)
         {
             PlayingCard card;
-            card.value = // rand between 1 - 13;
-            card.suit =  // rand between 1-4;
-            Deck[i] = card;
+            card.value = s;
+            card.suit = i;
+            Deck.emplace_back(card);
+            card.print();
         }
-       
-
+    }
     
 
     //intro
-    std::cout << "Welcome to Single deck Blackjack!" << "\n" << "Press X to start a new game!\n";
+   /* std::cout << "Welcome to Single deck Blackjack!" << "\n" << "Input X to start a new game!\n";
     std::cin >> g;
 
     if(g == "x" || g == "X")
@@ -90,10 +100,9 @@ int main()
     //game
     while(game = true)
     {
-        int playerValue;
-        int dealerValue;
+        
         bool playerTurn = false;
-        bool dealerTurn ;
+        bool dealerTurn = true;
 
         //dealerturn1
         std::cout << "The dealer shuffles the deck!" << "\n" << "He draws one hidden card and: " << /*card2*/
@@ -101,31 +110,31 @@ int main()
         //add cards to dealer deck and check value 
 
 
-        //playerturn1
-        std::cout << "Your first card is: " << /****/ << "\n";
+        //playerturn1*/
+      //  std::cout << "Your first card is: " << /****/ << "\n";
 
-        playerTurn = true;
+       /* playerTurn = true;
         dealerTurn = false;
 
         while(playerTurn == true)
         {
-            char a = "";
+            char a = '';
 
-            std::cout << "Your hand value is:" << /*playerhandvalue*/ << " and the dealer has: " << /*dealerhandvalue*/ <<"\n"; 
+            std::cout << "Your hand value is:" << playerValue << " and the dealer has: " << dealerValue <<"\n"; 
             std::cout << "Do you want to hit or stay? (y/n)";
             std::cin >> a;
 
             if(a = "y" || a = "Y")
             {
                 //add card to playerHand and check value
-                std::cout << "You draw: " << /*card*/ <<"\n";
+              //  std::cout << "You draw: " << /*card <<"\n";
 
-                if(/*playerhandvalue*/ > 21)
-                {
+              //  if(/*playerhandvalue > 21)
+              /*  {
                     std::cout << "You went over 21!";
                     //losefunction
                 }
-                if(/*playerhandvalue*/ == 21)
+              //  if(/*playerhandvalue*//* == 21)
                 {
                     //win function
 
@@ -142,11 +151,9 @@ int main()
             {
                 std::cout << "Invalid input, please input Y or N \n";
             }
-            
-
-            
+          
         }
-    }
+    }*/
 
 
 }
