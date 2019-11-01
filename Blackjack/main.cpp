@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <random>
+#include <algorithm>
 
 
 
@@ -60,18 +61,15 @@ int main()
 {
     std::random_device rd;
     std::mt19937 gen(rd());
-    std::uniform_int_distribution<int> rvalue(1,13);
-    std::uniform_int_distribution<int> rsuit(1,4);
 
     bool game = false;
     char g;
     int playerValue = 0;
     int dealerValue = 0;
 
-   // std::vector<> playerHand;
-    //std::vector<P> dealerHand;
-
-    //create and shuffle deck 
+    std::vector<PlayingCard> playerHand;
+    std::vector<PlayingCard> dealerHand;
+    //create deck 
     std::vector<PlayingCard> Deck;
 
     for(int i = 1; i <= 4; ++i)
@@ -82,10 +80,8 @@ int main()
             card.value = s;
             card.suit = i;
             Deck.emplace_back(card);
-            card.print();
         }
     }
-    
 
     //intro
    /* std::cout << "Welcome to Single deck Blackjack!" << "\n" << "Input X to start a new game!\n";
@@ -105,9 +101,9 @@ int main()
         bool dealerTurn = true;
 
         //dealerturn1
+        std::shuffle(Deck.begin(), Deck.end(), gen);
+        //Move 2 cards from deck to dealer hand and add their values to dealervalue 
         std::cout << "The dealer shuffles the deck!" << "\n" << "He draws one hidden card and: " << /*card2*/
-
-        //add cards to dealer deck and check value 
 
 
         //playerturn1*/
@@ -126,6 +122,7 @@ int main()
 
             if(a = "y" || a = "Y")
             {
+                //make function for checking value
                 //add card to playerHand and check value
               //  std::cout << "You draw: " << /*card <<"\n";
 
