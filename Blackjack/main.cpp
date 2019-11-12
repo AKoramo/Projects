@@ -35,19 +35,19 @@ struct PlayingCard
         }
         if(suit == 1)
         {
-            std::cout << "Diamonds ";
+            std::cout << "Diamonds \n";
         }
         if (suit == 2)
         {
-            std::cout << "Hearts ";
+            std::cout << "Hearts \n";
         }
         if (suit == 3)
         {
-            std::cout << "Spades ";
+            std::cout << "Spades \n";
         }
         if (suit == 4)
         {
-            std::cout << "Clubs ";
+            std::cout << "Clubs \n";
         }
     }
 
@@ -57,7 +57,7 @@ int gameStart()
 {
     char g;
 
-    std::cout << "Input S to (S)tart a new game or you can (E)xit with E";
+    std::cout << "\n\nInput S to (S)tart a new game or you can (E)xit with E: ";
 
     std::cin >> g;
 
@@ -87,8 +87,6 @@ int main()
 
     bool game = false;
 
-   
-    
 
     //intro
     std::cout << "\n\n" << "Welcome to Single deck Blackjack!" << "\n\n";
@@ -110,7 +108,7 @@ int main()
         std::vector<PlayingCard> playerHand;
         std::vector<PlayingCard> dealerHand;
 
-        bool playerTurn = false;
+      
 
         int holeValue = 0;
         int playerValue = 0;
@@ -141,35 +139,28 @@ int main()
 
         Deck[0].print();
         dealerHand.emplace_back(Deck[0]);
-        dealerValue =+ Deck[0].value;
+        dealerValue += Deck[0].value;
         Deck.erase(Deck.begin());
 
         std::cout << "and a hidden hole card. \n\n";
 
         dealerHand.emplace_back(Deck[0]);
-        holeValue =+ Deck[0].value;
+        holeValue += Deck[0].value;
         Deck.erase(Deck.begin());
-        
-
-        
-        for(auto w : dealerHand)
-        {
-            w.print();
-        }
-        //playerturn1
-        bool playerTurn = true;
+ 
+        //PLAYER'S TURN
         bool stay = false;
        
-        while(playerTurn == true)
+        while(true)
         {
-            char a = '';
+            char a;
 
-            std::cout << "Your hand value is:" << playerValue << " and the dealer has: " << dealerValue
+            std::cout << "Your hand value is: " << playerValue << " and the dealer has: " << dealerValue
             <<" with the hole card hidden." <<"\n\n"; 
             std::cout << "Do you want to (H)it or (S)tay?: ";
             std::cin >> a;
 
-            if(isalpha(a) && (a = 'h' || a = 'H'))
+            if(isalpha(a) && (a == 'h' || a == 'H'))
             {
                 std::cout << "\n" << "You get ";
 
@@ -177,25 +168,23 @@ int main()
                 playerHand.emplace_back(Deck[0]);
                 playerValue += Deck[0].value;
                 Deck.erase(Deck.begin());
-                
-                std::cout << " and your current hand value is " << playerValue << "\n";
 
                 //Check value for win or lose
                 if(playerValue > 21)
                 {
-                    std::cout << "Bust! You went over 21 and lost the game! \n";
+                    std::cout << "\n" << "Bust! You went over 21 and lost the game! \n";
                     break;
                 }
                 if(playerValue == 21)
                 {
-                    std::cout << "BLACKJACK!! you got 21 and won the game!";
+                    std::cout << "\n" << "BLACKJACK!! you got 21 and won the game!";
                     break;
                 }
             }
-            if(isalpha(a) && (a = 's' || a = 'S'))
+            else if(isalpha(a) && (a == 's' || a == 'S'))
             {
                 stay = true;
-                std::cout << "You stay with your hand: ";
+                std::cout << "You stay with your hand: \n";
                 for(auto c : playerHand)
                 {
                     c.print();
@@ -206,26 +195,26 @@ int main()
             else
             {
                 std::cout << "Invalid input, please input H or S \n";
-            }
-          
+            }  
         }
-
+        //DEALERS TURN IF PLAYER STAYS
         if(stay == true)
         {
             
-
             std::cout << "The dealer reveals the hole card and his hand is: ";
             for(auto d : dealerHand)
             {
                 d.print();
             }
-            dealerValue =+ holeValue;
+
+            dealerValue += holeValue;
 
             std::cout << "\n" << "with total value of " << dealerValue << "\n";
 
             //Dealer checks for win, lose or draws more cards
             while(true)
             {
+            
                 if(dealerValue > 21)
                 {
                     std::cout << "The dealer went over 21 and lost. Congratulations!!";
@@ -233,25 +222,47 @@ int main()
                 }
                 if(dealerValue == 21)
                 {
-                    std::cout << "The dealer got BLACKJACK with 21, you lost!"
+                    std::cout << "The dealer got BLACKJACK with 21, you lost!";
                     break;
                 }
-                if((dealerValue == playerValue)
+                if(dealerValue == playerValue)
                 {
                     std::cout << "The dealer wins with a tie, you lost!";
                     break;
                 }
-
+                if(dealerValue > playerValue)
+                {
+                    std::cout << "The dealer wins the game with hand value of " << dealerValue << " against your " << playerValue;
+                    break;
+                }
+                if(dealerValue < playerValue)//BUG HERE
+                {
+                    std::cout << "The dealer draws ";
+                    Deck[0].print();
+                    std::cout << "\n";
+                    dealerHand.emplace_back(Deck[0]);
+                    dealerValue += Deck[0].value;
+                    Deck.erase(Deck.begin());
+                    
+                }
             }
-
-
         }
-        else
+
+        x = gameStart();
+        if(x == 1)
         {
-            /* code */
+            continue;
         }
-        
-    }*/
+        if(x == 2)
+        {
+            break;
+        }
 
+    }//game
+
+    if(x == 2)
+    {
+        return 0;
+    }
 
 }
