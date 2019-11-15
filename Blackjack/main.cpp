@@ -4,12 +4,11 @@
 #include <algorithm>
 #include <ctype.h>
 
-
-
 struct PlayingCard 
 {
     int suit = 0;
     int value = 0;
+    std::vector<std::string> suits = {"Diamonds \n", "Hearts \n", "Spades \n", "Clubs \n"};
 
     void print()
     {
@@ -33,24 +32,8 @@ struct PlayingCard
         {
             std::cout << "King of ";
         }
-        if(suit == 1)
-        {
-            std::cout << "Diamonds \n";
-        }
-        if (suit == 2)
-        {
-            std::cout << "Hearts \n";
-        }
-        if (suit == 3)
-        {
-            std::cout << "Spades \n";
-        }
-        if (suit == 4)
-        {
-            std::cout << "Clubs \n";
-        }
+        std::cout << suits[suit];
     }
-
 };
 
 int gameStart()
@@ -58,7 +41,6 @@ int gameStart()
     char g;
 
     std::cout << "\n\nInput S to (S)tart a new game or you can (E)xit with E: ";
-
     std::cin >> g;
 
     while(g != 's' || g != 'S')
@@ -77,7 +59,6 @@ int gameStart()
             std::cin >> g;
         }
     }
-
 }
 
 int main()
@@ -86,7 +67,6 @@ int main()
     std::mt19937 gen(rd());
 
     bool game = false;
-
 
     //intro
     std::cout << "\n\n" << "Welcome to Single deck Blackjack!" << "\n\n";
@@ -101,14 +81,12 @@ int main()
         return 0;
     }
 
-    //game
+    //GAME
     while(game = true)
     {
         std::vector<PlayingCard> Deck;
         std::vector<PlayingCard> playerHand;
         std::vector<PlayingCard> dealerHand;
-
-      
 
         int holeValue = 0;
         int playerValue = 0;
@@ -235,7 +213,7 @@ int main()
                     std::cout << "The dealer wins the game with hand value of " << dealerValue << " against your " << playerValue;
                     break;
                 }
-                if(dealerValue < playerValue)//BUG HERE
+                if(dealerValue < playerValue)
                 {
                     std::cout << "The dealer draws ";
                     Deck[0].print();
@@ -257,8 +235,7 @@ int main()
         {
             break;
         }
-
-    }//game
+    }
 
     if(x == 2)
     {
