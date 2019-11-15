@@ -140,7 +140,7 @@ int main()
         {
             char a;
             std::cout << "\n" << "-------------------" << "\n\n";
-            std::cout << "Your hand value is: " << playerValue << " and the dealer has: " << dealerValue
+            std::cout << "Your hand value is: " << playerValue << "\n" << "The dealer has: " << dealerValue
             <<" with the hole card hidden." <<"\n\n"; 
             std::cout << "Do you want to (H)it or (S)tay?: ";
             std::cin >> a;
@@ -173,7 +173,7 @@ int main()
             {
                 stay = true;
                 std::cout << "\n" << "-------------------" << "\n\n";
-                std::cout << "You stay with your hand: \n";
+                std::cout << "You stay with your hand: \n\n";
                 for(auto c : playerHand)
                 {
                     c.print();
@@ -190,7 +190,7 @@ int main()
         if(stay == true)
         {
             std::cout << "\n" << "-------------------" << "\n\n";
-            std::cout << "The dealer reveals the hole card and his hand is: \n";
+            std::cout << "The dealer reveals the hole card and his hand is: \n\n";
             for(auto d : dealerHand)
             {
                 d.print();
@@ -225,7 +225,7 @@ int main()
                 if(dealerValue > playerValue)
                 {
                     std::cout << "\n" << "-------------------" << "\n";
-                    std::cout << "The dealer wins the game with hand value of " << dealerValue << " against your " << playerValue << "\n"; 
+                    std::cout << "\n" << "The dealer wins the game with hand value of " << dealerValue << " against your " << playerValue << "\n"; 
                     break;
                 }
                 if(dealerValue < playerValue)
@@ -233,7 +233,6 @@ int main()
                     std::cout << "\n" << "-------------------" << "\n";
                     std::cout << "\n" << "The dealer draws: ";
                     Deck[0].print();
-                    std::cout << "\n";
                     dealerHand.emplace_back(Deck[0]);
                     dealerValue += Deck[0].value;
                     Deck.erase(Deck.begin());
