@@ -39,8 +39,8 @@ struct PlayingCard
 int gameStart()
 {
     char g;
-
-    std::cout << "\n\nInput S to (S)tart a new game or you can (E)xit with E: ";
+    std::cout << "\n" << "-------------------" << "\n";
+    std::cout << "\nInput S to (S)tart a new game or you can (E)xit with E: ";
     std::cin >> g;
 
     while(g != 's' || g != 'S')
@@ -68,8 +68,12 @@ int main()
 
     bool game = false;
 
-    //intro
-    std::cout << "\n\n" << "Welcome to Single deck Blackjack!" << "\n\n";
+    //INTRO & GRAPHIC
+    std::cout << "\n" << " _____ " << "\n" << "|A .  | _____" << "\n" << "| /.\\ ||A ^  | _____" << "\n" 
+    << "|(_._)|| / \\ ||A _  | _____" << "\n" << "|  |  || \\ / || ( ) ||A_ _ |" << "\n" << "|____V||  .  ||(_'_)||( v )|" 
+    << "\n" << "       |____V||  |  || \\ / |" << "\n" << "              |____V||  .  |" << "\n" << "                     |____V|" << "\n";
+
+    std::cout << "\n\n" << "Welcome to Single deck Blackjack!" << "\n";
 
     int x = gameStart();
     if(x == 1)
@@ -93,7 +97,7 @@ int main()
         int dealerValue = 0;
 
         //Create and shuffle the deck
-        for(int i = 1; i <= 4; ++i)
+        for(int i = 0; i <= 3; ++i)
         {
             for(int s = 1; s <= 13; s++)
             {
@@ -106,6 +110,7 @@ int main()
 
         std::shuffle(Deck.begin(), Deck.end(), gen);
 
+        std::cout << "\n" << "-------------------" << "\n";
         std::cout << "\n" << "The dealer shuffles the deck!" << "\n" << "He deals your first card ";
 
         Deck[0].print();
@@ -113,6 +118,7 @@ int main()
         playerValue += Deck[0].value;
         Deck.erase(Deck.begin());
 
+        std::cout << "\n" << "-------------------" << "\n";
         std::cout << "\n" << "He deals himself ";
 
         Deck[0].print();
@@ -120,7 +126,7 @@ int main()
         dealerValue += Deck[0].value;
         Deck.erase(Deck.begin());
 
-        std::cout << "and a hidden hole card. \n\n";
+        std::cout << "and a hidden hole card. \n";
 
         dealerHand.emplace_back(Deck[0]);
         holeValue += Deck[0].value;
@@ -132,7 +138,7 @@ int main()
         while(true)
         {
             char a;
-
+            std::cout << "\n" << "-------------------" << "\n\n";
             std::cout << "Your hand value is: " << playerValue << " and the dealer has: " << dealerValue
             <<" with the hole card hidden." <<"\n\n"; 
             std::cout << "Do you want to (H)it or (S)tay?: ";
@@ -140,6 +146,7 @@ int main()
 
             if(isalpha(a) && (a == 'h' || a == 'H'))
             {
+                std::cout << "\n" << "-------------------" << "\n";
                 std::cout << "\n" << "You get ";
 
                 Deck[0].print();
@@ -150,11 +157,13 @@ int main()
                 //Check value for win or lose
                 if(playerValue > 21)
                 {
+                    std::cout << "\n" << "-------------------" << "\n";
                     std::cout << "\n" << "Bust! You went over 21 and lost the game! \n";
                     break;
                 }
                 if(playerValue == 21)
                 {
+                    std::cout << "\n" << "-------------------" << "\n";
                     std::cout << "\n" << "BLACKJACK!! you got 21 and won the game!";
                     break;
                 }
@@ -162,6 +171,7 @@ int main()
             else if(isalpha(a) && (a == 's' || a == 'S'))
             {
                 stay = true;
+                std::cout << "\n" << "-------------------" << "\n";
                 std::cout << "You stay with your hand: \n";
                 for(auto c : playerHand)
                 {
@@ -195,26 +205,31 @@ int main()
             
                 if(dealerValue > 21)
                 {
+                    std::cout << "\n" << "-------------------" << "\n";
                     std::cout << "The dealer went over 21 and lost. Congratulations!!";
                     break;
                 }
                 if(dealerValue == 21)
                 {
+                    std::cout << "\n" << "-------------------" << "\n";
                     std::cout << "The dealer got BLACKJACK with 21, you lost!";
                     break;
                 }
                 if(dealerValue == playerValue)
                 {
+                    std::cout << "\n" << "-------------------" << "\n";
                     std::cout << "The dealer wins with a tie, you lost!";
                     break;
                 }
                 if(dealerValue > playerValue)
                 {
+                    std::cout << "\n" << "-------------------" << "\n";
                     std::cout << "The dealer wins the game with hand value of " << dealerValue << " against your " << playerValue;
                     break;
                 }
                 if(dealerValue < playerValue)
                 {
+                    std::cout << "\n" << "-------------------" << "\n";
                     std::cout << "The dealer draws ";
                     Deck[0].print();
                     std::cout << "\n";
