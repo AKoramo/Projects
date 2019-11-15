@@ -55,6 +55,7 @@ int gameStart()
         }
         else
         {
+            std::cout << "\n" << "-------------------" << "\n";
             std::cout << "Invalid input, please input S for new game or E to exit. \n";
             std::cin >> g;
         }
@@ -111,7 +112,7 @@ int main()
         std::shuffle(Deck.begin(), Deck.end(), gen);
 
         std::cout << "\n" << "-------------------" << "\n";
-        std::cout << "\n" << "The dealer shuffles the deck!" << "\n" << "He deals your first card ";
+        std::cout << "\n" << "The dealer shuffles the deck!" << "\n" << "He deals your first card: ";
 
         Deck[0].print();
         playerHand.emplace_back(Deck[0]);
@@ -119,7 +120,7 @@ int main()
         Deck.erase(Deck.begin());
 
         std::cout << "\n" << "-------------------" << "\n";
-        std::cout << "\n" << "He deals himself ";
+        std::cout << "\n" << "He deals himself: ";
 
         Deck[0].print();
         dealerHand.emplace_back(Deck[0]);
@@ -164,20 +165,20 @@ int main()
                 if(playerValue == 21)
                 {
                     std::cout << "\n" << "-------------------" << "\n";
-                    std::cout << "\n" << "BLACKJACK!! you got 21 and won the game!";
+                    std::cout << "\n" << "BLACKJACK!! you got 21 and won the game! \n";
                     break;
                 }
             }
             else if(isalpha(a) && (a == 's' || a == 'S'))
             {
                 stay = true;
-                std::cout << "\n" << "-------------------" << "\n";
+                std::cout << "\n" << "-------------------" << "\n\n";
                 std::cout << "You stay with your hand: \n";
                 for(auto c : playerHand)
                 {
                     c.print();
                 }
-                std::cout << "\n" << "with total value of " << playerValue << "\n\n";
+                std::cout << "\n" << "with total value of " << playerValue << "\n";
                 break;
             }
             else
@@ -188,8 +189,8 @@ int main()
         //DEALERS TURN IF PLAYER STAYS
         if(stay == true)
         {
-            
-            std::cout << "The dealer reveals the hole card and his hand is: ";
+            std::cout << "\n" << "-------------------" << "\n\n";
+            std::cout << "The dealer reveals the hole card and his hand is: \n";
             for(auto d : dealerHand)
             {
                 d.print();
@@ -206,31 +207,31 @@ int main()
                 if(dealerValue > 21)
                 {
                     std::cout << "\n" << "-------------------" << "\n";
-                    std::cout << "The dealer went over 21 and lost. Congratulations!!";
+                    std::cout << "\n" << "The dealer went over 21 and lost. Congratulations!! \n";
                     break;
                 }
                 if(dealerValue == 21)
                 {
                     std::cout << "\n" << "-------------------" << "\n";
-                    std::cout << "The dealer got BLACKJACK with 21, you lost!";
+                    std::cout << "\n" << "The dealer got BLACKJACK with 21, you lost! \n";
                     break;
                 }
                 if(dealerValue == playerValue)
                 {
                     std::cout << "\n" << "-------------------" << "\n";
-                    std::cout << "The dealer wins with a tie, you lost!";
+                    std::cout << "\n" << "The dealer wins with a tie, you lost! \n";
                     break;
                 }
                 if(dealerValue > playerValue)
                 {
                     std::cout << "\n" << "-------------------" << "\n";
-                    std::cout << "The dealer wins the game with hand value of " << dealerValue << " against your " << playerValue;
+                    std::cout << "The dealer wins the game with hand value of " << dealerValue << " against your " << playerValue << "\n"; 
                     break;
                 }
                 if(dealerValue < playerValue)
                 {
                     std::cout << "\n" << "-------------------" << "\n";
-                    std::cout << "The dealer draws ";
+                    std::cout << "\n" << "The dealer draws: ";
                     Deck[0].print();
                     std::cout << "\n";
                     dealerHand.emplace_back(Deck[0]);
